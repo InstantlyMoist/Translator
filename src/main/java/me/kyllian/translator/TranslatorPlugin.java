@@ -4,11 +4,13 @@ import me.kyllian.translator.commands.LanguageCommand;
 import me.kyllian.translator.listeners.AsyncPlayerChatListener;
 import me.kyllian.translator.listeners.PlayerLoginListener;
 import me.kyllian.translator.utils.*;
+import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.UUID;
+import java.util.concurrent.Callable;
 
 public class TranslatorPlugin extends JavaPlugin {
 
@@ -23,6 +25,8 @@ public class TranslatorPlugin extends JavaPlugin {
     }
 
     public void onEnable() {
+        Metrics metrics = new Metrics(this);
+
         playerDataHashMap = new HashMap<>();
 
         new PlayerLoginListener(this);
