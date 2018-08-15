@@ -1,6 +1,6 @@
 name: Translator
 main: me.kyllian.translator.TranslatorPlugin
-version: 0.02
+version: 0.03
 description: Translator plugin
 
 commands:

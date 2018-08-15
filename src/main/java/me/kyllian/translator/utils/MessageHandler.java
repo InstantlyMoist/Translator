@@ -54,4 +54,8 @@ public class MessageHandler {
     public String getSetLanguageMessage() {
         return MessageUtils.colorTranslate(fileConfiguration.getString("SetLanguage"));
     }
+
+    public String getDetectedLanguageMessage(Language detectedLanguage) {
+        return MessageUtils.colorTranslate(String.format(fileConfiguration.getString("DetectedLanguage"), detectedLanguage.toString()));
+    }
 }
