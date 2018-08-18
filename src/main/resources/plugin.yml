@@ -1,7 +1,8 @@
 name: Translator
 main: me.kyllian.translator.TranslatorPlugin
-version: 0.03
+version: 0.04
 description: Translator plugin
+depend: [ProtocolLib]
 
 commands:
   language:

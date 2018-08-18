@@ -30,7 +30,7 @@ public class AsyncPlayerChatListener implements Listener {
                 try {
                     String translatedMessage = playerData.getLanguage() == recipientData.getLanguage() ?
                             event.getMessage() :
-                            plugin.getTranslationHandler().translate(event.getMessage(), playerData.getLanguage(), recipientData.getLanguage());
+                            plugin.getTranslationHandler().translate(event.getMessage(), playerData.getLanguage(), recipientData.getLanguage(), plugin.getApiKey());
                     recipient.sendMessage(event.getFormat().replace("%1$s", player.getDisplayName()).replace("%2$s", translatedMessage));
                 } catch (Exception exc) {
                     exc.printStackTrace();

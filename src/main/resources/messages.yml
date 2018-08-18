@@ -1,4 +1,4 @@
-UnknownLanguage: '&cUnknown langauge, known languages are: nl, co, iw, ku, sn, ur, af, da, hi, ko, ne, sd, vi, sq, de, hmn, hr, no, si, cy, am, en, hu, lo, uk, sk, be, ar, eo, ga, la, uz, sl, xh, hy, et, ig, lv, ps, su, yo, az, fi, is, lt, fa, so, zu, eu, fr, id, lb, pl, es, sv, bn, fy, it, mk, pt, sw, my, gl, ja, mg, pa, tg, bs, ka, jw, ml, ro, tl, bg, el, yi, ms, ru, ta, ca, gu, kn, mt, sm, te, ceb, ht, kk, mi, gd, th, ny, ha, km, mr, sr, cs, zhcn, haw, ky, mn, st, tr'
+UnknownLanguage: '&cUnknown langauge, known languages are: az, ml, sq, mt, am, mk, en, mi, ar, mr , hy,mhr, af, mn, eu, de, ba, ne, be, no, bn, pa, my, pap, bg, fa, bs, pl, cy, pt, hu, ro, vi, ru, ht, ceb, gl, st, nl, si, mrj, sk, el, sl, ka, sw, gu, su, da, tg, he, th, yi, tl, id, ta, ga, tt, it, te, is, tr, es ,udm,kk, uz, kn, uk, ca, ur, ky, fi, zh, fr, ko, hi, xh, hr, km, cs, lo, sv, la, gd, lv, et,lt, eo, lb, jv, mg, ja, ms;'
 NotAPlayer: '&cYou dont seem to be a player'
 LanguageSet: '&cLanguage set to %s'
 UnknownArgument: '&cArgument is unknown'
