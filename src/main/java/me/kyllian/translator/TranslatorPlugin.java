@@ -46,7 +46,7 @@ public class TranslatorPlugin extends JavaPlugin {
         playerDataHashMap = new HashMap<>();
 
         new PlayerJoinListener(this);
-        //new AsyncPlayerChatListener(this);
+        new AsyncPlayerChatListener(this);
 
         getCommand("language").setExecutor(new LanguageCommand(this));
 
@@ -75,6 +75,15 @@ public class TranslatorPlugin extends JavaPlugin {
                                     if (packetJson.get("extra") != null) {
                                         JsonArray jsonArray = packetJson.get("extra").getAsJsonArray();
                                         JsonArray newArray = new JsonArray();
+                                        StringBuilder sb = new StringBuilder();
+                                        for (JsonElement element : jsonArray) {
+                                            JsonObject object = element.getAsJsonObject();
+                                            sb.append(object.get("text").getAsString());
+                                        }
+                                        String finalString = sb.toString().trim();
+                                        Bukkit.getOnlinePlayers().forEach(onlinePlayer -> {
+                                            if (finalString.contains(onlinePlayer.getDisplayName())) return;
+                                        });
                                         for (JsonElement element : jsonArray) {
                                             JsonObject newObject = new JsonObject();
                                             String initialMsg;
