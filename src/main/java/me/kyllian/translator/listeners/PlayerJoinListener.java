@@ -23,7 +23,7 @@ public class PlayerJoinListener implements Listener {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player.getUniqueId());
         if (!player.hasPlayedBefore()) {
-            String playerLanguage = playerData.getMinecraftLanguage();
+            String playerLanguage = player.getLocale();
             if (playerLanguage == null || Language.valueOf(playerLanguage) == null) {
                 player.sendMessage(plugin.getMessageHandler().getSetLanguageMessage());
                 return;

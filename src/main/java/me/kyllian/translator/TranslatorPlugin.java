@@ -59,6 +59,11 @@ public class TranslatorPlugin extends JavaPlugin {
             playerData.setLanguage(Language.valueOf(getDataHandler().getData().getString(player.getUniqueId().toString())));
         });
 
+        if (getConfig().getString("APIKey").equalsIgnoreCase("enterhere")) {
+            Bukkit.getLogger().warning("The API key needs to be entered. Make sure to do so. Disabling plugin until you have a correct API key...");
+            Bukkit.getPluginManager().disablePlugin(this);
+        }
+
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
             ProtocolLibrary.getProtocolManager().addPacketListener(
                     new PacketAdapter(this, PacketType.Play.Server.CHAT) {
@@ -97,7 +102,7 @@ public class TranslatorPlugin extends JavaPlugin {
                                                 String msg = initialMsg.startsWith(" ") ? initialMsg.substring(1) : initialMsg;
                                                 String tMsg = getTranslationHandler().translate(initialMsg, Language.unknown, playerData.getLanguage(), getApiKey());
 
-                                                newObject.addProperty("text", tMsg);
+                                                newObject.addProperty("text", tMsg + " ");
                                                 if (newObject.get("hoverEvent") == null) {
                                                     if (!msg.equals(tMsg.startsWith(" ") ? tMsg.substring(1) : tMsg)) {
                                                         JsonObject hoverInfo = new JsonObject();
