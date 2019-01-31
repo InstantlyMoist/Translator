@@ -11,6 +11,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import me.kyllian.translator.commands.LanguageCommand;
+import me.kyllian.translator.commands.TranslatorCommand;
 import me.kyllian.translator.listeners.AsyncPlayerChatListener;
 import me.kyllian.translator.listeners.PlayerJoinListener;
 import me.kyllian.translator.utils.*;
@@ -30,14 +31,15 @@ public class TranslatorPlugin extends JavaPlugin {
     private TranslationHandler translationHandler;
     private String apiKey;
     public static TranslatorPlugin plugin;
-
-    public static TranslatorPlugin getPlugin() {
-        return plugin;
-    }
+    private UpdateChecker updateChecker;
+    private boolean updateCheck;
 
     public void onEnable() {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
+
+        updateCheck = getConfig().getBoolean("UpdateChecking");
+        updateChecker = new UpdateChecker(this, 59799);
 
         apiKey = getConfig().getString("APIKey");
 
@@ -49,6 +51,7 @@ public class TranslatorPlugin extends JavaPlugin {
         new AsyncPlayerChatListener(this);
 
         getCommand("language").setExecutor(new LanguageCommand(this));
+        getCommand("translator").setExecutor(new TranslatorCommand(this));
 
         messageHandler = new MessageHandler(this);
         dataHandler = new DataHandler(this);
@@ -70,6 +73,7 @@ public class TranslatorPlugin extends JavaPlugin {
                         @Override
                         public void onPacketSending(PacketEvent event) {
                             Player player = event.getPlayer();
+                            if (getEnabled(player)) return;
                             PlayerData playerData = getPlayerData(player.getUniqueId());
                             if (playerData.getLanguage() == Language.unknown) return;
                             try {
@@ -157,5 +161,21 @@ public class TranslatorPlugin extends JavaPlugin {
 
     public String getApiKey() {
         return apiKey;
+    }
+
+    public boolean getEnabled(Player player) {
+        if (getDataHandler().getData().get(player.getUniqueId().toString() + ".enabled") == null) {
+            getDataHandler().getData().set(player.getUniqueId().toString() + ".enabled", true);
+            getDataHandler().save();
+        }
+        return getDataHandler().getData().getBoolean(player.getUniqueId().toString() + ".enabled");
+    }
+
+    public UpdateChecker getUpdateChecker() {
+        return updateChecker;
+    }
+
+    public boolean isUpdateCheck() {
+        return updateCheck;
     }
 }

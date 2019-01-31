@@ -58,4 +58,25 @@ public class MessageHandler {
     public String getDetectedLanguageMessage(Language detectedLanguage) {
         return MessageUtils.colorTranslate(String.format(fileConfiguration.getString("DetectedLanguage"), detectedLanguage.toString()));
     }
+
+    public String getTurnedOnMessage() {
+        return MessageUtils.colorTranslate(fileConfiguration.getString("TurnedOn"));
+    }
+
+    public String getTurnedOffMessage() {
+        return MessageUtils.colorTranslate(fileConfiguration.getString("TurnedOff"));
+    }
+
+    public String getCheckingUpdateMessage() {
+        return MessageUtils.colorTranslate(fileConfiguration.getString("CheckingUpdate"));
+    }
+
+    public String getUpdateFoundMessage(String oldVersion, String newVersion) {
+        return MessageUtils.colorTranslate(fileConfiguration.getString(".CheckingUpdate").replace("%oldversion%", oldVersion)
+                .replace("%newversion%", newVersion).replace("%url%", plugin.getUpdateChecker().getResourceURL()));
+    }
+
+    public String getUpdateNotFoundMessage() {
+        return MessageUtils.colorTranslate(fileConfiguration.getString("UpdateNotFound"));
+    }
 }

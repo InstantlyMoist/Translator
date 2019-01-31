@@ -23,18 +23,22 @@ public class AsyncPlayerChatListener implements Listener {
     public void onPlayerChat(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         PlayerData playerData = plugin.getPlayerData(player.getUniqueId());
-        new ArrayList<Player>(event.getRecipients()).forEach(recipient -> {
+        event.getRecipients().forEach(test -> {
+
+        });
+
+        event.getRecipients().forEach(recipient -> {
+            if (player == recipient) return;
+            if (!plugin.getDataHandler().getData().getBoolean(player.getUniqueId().toString() + ".enabled")) return;
             if (recipient != player) event.getRecipients().remove(recipient);
-            if (player != recipient) {
-                PlayerData recipientData = plugin.getPlayerData(recipient.getUniqueId());
-                try {
-                    String translatedMessage = playerData.getLanguage() == recipientData.getLanguage() ?
-                            event.getMessage() :
-                            plugin.getTranslationHandler().translate(event.getMessage(), playerData.getLanguage(), recipientData.getLanguage(), plugin.getApiKey());
-                    recipient.sendMessage(event.getFormat().replace("%1$s", player.getDisplayName()).replace("%2$s", translatedMessage));
-                } catch (Exception exc) {
-                    exc.printStackTrace();
-                }
+            PlayerData recipientData = plugin.getPlayerData(recipient.getUniqueId());
+            try {
+                String translatedMessage = playerData.getLanguage() == recipientData.getLanguage() ?
+                        event.getMessage() :
+                        plugin.getTranslationHandler().translate(event.getMessage(), playerData.getLanguage(), recipientData.getLanguage(), plugin.getApiKey());
+                recipient.sendMessage(event.getFormat().replace("%1$s", player.getDisplayName()).replace("%2$s", translatedMessage));
+            } catch (Exception exc) {
+                exc.printStackTrace();
             }
         });
     }

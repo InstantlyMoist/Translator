@@ -28,12 +28,14 @@ public class LanguageCommand implements CommandExecutor {
                 return true;
             }
             Player player = (Player) commandSender;
-            if (Language.valueOf(language) == null) {
+            try {
+                Language.valueOf(language);
+            } catch (IllegalArgumentException exception) {
                 player.sendMessage(plugin.getMessageHandler().getUnknownLanguageMessage());
                 return true;
             }
             PlayerData playerData = plugin.getPlayerData(player.getUniqueId());
-            plugin.getDataHandler().getData().set(player.getUniqueId().toString(), language);
+            plugin.getDataHandler().getData().set(player.getUniqueId().toString() + ".language", language);
             playerData.setLanguage(Language.valueOf(language));
             player.sendMessage(plugin.getMessageHandler().getLanguageSetMessage(language));
             return true;

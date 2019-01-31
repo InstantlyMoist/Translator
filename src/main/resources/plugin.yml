@@ -8,3 +8,6 @@ commands:
   language:
     usage: /<command>
     aliases: [lang]
+  translator:
+    usage: /<command>
+    aliases: [translate]
