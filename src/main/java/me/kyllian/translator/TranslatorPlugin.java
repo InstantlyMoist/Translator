@@ -73,7 +73,7 @@ public class TranslatorPlugin extends JavaPlugin {
                         @Override
                         public void onPacketSending(PacketEvent event) {
                             Player player = event.getPlayer();
-                            if (getEnabled(player)) return;
+                            if (!getEnabled(player)) return;
                             PlayerData playerData = getPlayerData(player.getUniqueId());
                             if (playerData.getLanguage() == Language.unknown) return;
                             try {

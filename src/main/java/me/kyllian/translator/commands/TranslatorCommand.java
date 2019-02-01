@@ -32,7 +32,7 @@ public class TranslatorCommand implements CommandExecutor {
                 return true;
             }
             if (args[0].equalsIgnoreCase("update")) {
-                if (commandSender.hasPermission("autocast.update")) {
+                if (commandSender.hasPermission("translator.update")) {
                     commandSender.sendMessage(plugin.getMessageHandler().getCheckingUpdateMessage());
                     plugin.getUpdateChecker().check();
                     commandSender.sendMessage(plugin.getUpdateChecker().getUpdateMessage());
