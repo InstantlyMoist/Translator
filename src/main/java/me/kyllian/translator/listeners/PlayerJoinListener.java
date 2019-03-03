@@ -40,7 +40,7 @@ public class PlayerJoinListener implements Listener {
             return;
         }
         String language = plugin.getDataHandler().getData().getString(player.getUniqueId().toString() + ".language");
-        if (language.equalsIgnoreCase("unknown")) {
+        if (language == null || language.equalsIgnoreCase("unknown")) {
             player.sendMessage(plugin.getMessageHandler().getSetLanguageMessage());
             return;
         }
