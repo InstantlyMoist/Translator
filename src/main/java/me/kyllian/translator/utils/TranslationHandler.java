@@ -4,6 +4,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import jdk.nashorn.api.scripting.URLReader;
+import org.bukkit.Bukkit;
+import org.json.simple.JSONObject;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -23,10 +26,9 @@ public class TranslationHandler {
         URL url = new URL(link.replace("%language%", language).replace("%key%", apiKey).replace("%text%", message));
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
         httpsURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
-        BufferedReader reader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream()));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(httpsURLConnection.getInputStream(), "UTF-8"));
         String input = reader.readLine();
         reader.close();
-
         JsonObject object = new JsonParser().parse(input).getAsJsonObject();
         JsonArray array = object.getAsJsonArray("text");
         StringBuilder stringBuilder = new StringBuilder();
