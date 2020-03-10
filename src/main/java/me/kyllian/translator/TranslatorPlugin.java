@@ -43,7 +43,7 @@ public class TranslatorPlugin extends JavaPlugin {
 
         apiKey = getConfig().getString("APIKey");
 
-        Metrics metrics = new Metrics(this);
+        Metrics metrics = new Metrics(this, 59799);
 
         playerDataHashMap = new HashMap<>();
 
@@ -68,6 +68,7 @@ public class TranslatorPlugin extends JavaPlugin {
         }
 
         if (Bukkit.getPluginManager().getPlugin("ProtocolLib") != null) {
+
             ProtocolLibrary.getProtocolManager().addPacketListener(
                     new PacketAdapter(this, PacketType.Play.Server.CHAT) {
                         @Override
